@@ -1,12 +1,11 @@
 import connexion
-import requests
 import datetime
 import yaml
 import json
 import logging.config
 from pykafka import KafkaClient
 from connexion import NoContent
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 with open('log_conf.yaml', 'r') as f:
     log_config = yaml.safe_load(f.read())
@@ -33,7 +32,6 @@ def scan_in(ScanRecord):
     logger.info("adding new scan record")
     logger.debug(ScanRecord)
 
-    #response = requests.post(STORE_SERVICE_SCAN_IN, json=ScanRecord, headers=HEADERS)
     return NoContent, 200
 
 def update_body_info(BodyInfoUpdate):
@@ -49,7 +47,6 @@ def update_body_info(BodyInfoUpdate):
     logger.info("adding new body info record")
     logger.debug(BodyInfoUpdate)
 
-    #response = requests.post(STORE_SERVICE_BODY_INFO, json=BodyInfoUpdate, headers=HEADERS)
     return NoContent, 200
 
 app = connexion.FlaskApp(__name__, specification_dir='')
